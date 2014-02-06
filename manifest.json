@@ -1,0 +1,30 @@
+{
+    "manifest_version": 2,
+
+    "name": "ML Questions",
+    "short_name": "ML Questions",
+    "description": "Esta extension sirve para ver las preguntas de autos y motos de mercadolibre ~ By Anush ~",
+    "version": "1.1",
+    "author": "Pablo Matías Gomez",
+
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png" 
+    },
+
+    "content_scripts": [
+        {
+            "matches": [
+                "http://auto.mercadolibre.com.ar/*", 
+                "https://auto.mercadolibre.com.ar/*",
+                "http://moto.mercadolibre.com.ar/*", 
+                "https://moto.mercadolibre.com.ar/*"
+            ],
+            "js": [
+                "jquery-1.11.0.js", 
+                "functions.js"
+            ]
+        }
+    ]
+}
