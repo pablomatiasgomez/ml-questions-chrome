@@ -8,9 +8,9 @@
     "author": "Pablo Matías Gomez",
 
     "icons": {
-        "16": "icon16.png",
-        "48": "icon48.png",
-        "128": "icon128.png" 
+        "16": "images/icons/icon16.png",
+        "48": "images/icons/icon48.png",
+        "128": "images/icons/icon128.png" 
     },
 
     "content_scripts": [
@@ -22,8 +22,8 @@
                 "https://moto.mercadolibre.com.ar/*"
             ],
             "js": [
-                "jquery-1.11.0.js", 
-                "functions.js"
+                "js/jquery-1.11.0.js", 
+                "js/functions.js"
             ]
         }
     ]
