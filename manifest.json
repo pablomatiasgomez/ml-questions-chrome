@@ -3,7 +3,7 @@
 
     "name": "ML Questions",
     "short_name": "ML Questions",
-    "description": "Esta extension sirve para mostrar las preguntas (que mercadolibre oculta) de autos, motos, casas y departamentos de mercadolibre ~ By Anush ~",
+    "description": "Esta extension sirve para mostrar las preguntas (que mercadolibre oculta) de autos, motos e inmuebles (casas, departamentos, terrenos, etc) de mercadolibre ~ By Anush ~",
     "version": "1.2",
     "author": "Pablo Matías Gomez",
 
@@ -16,16 +16,21 @@
     "content_scripts": [
         {
             "matches": [
+                "http://vehiculo.mercadolibre.com.ar/*", 
+                "https://vehiculo.mercadolibre.com.ar/*",
                 "http://auto.mercadolibre.com.ar/*", 
                 "https://auto.mercadolibre.com.ar/*",
                 "http://moto.mercadolibre.com.ar/*", 
                 "https://moto.mercadolibre.com.ar/*",
-                "http://departamento.mercadolibre.com.ar/*", 
-                "https://departamento.mercadolibre.com.ar/*",
+
+                "http://inmueble.mercadolibre.com.ar/*", 
+                "https://inmueble.mercadolibre.com.ar/*",
                 "http://casa.mercadolibre.com.ar/*", 
                 "https://casa.mercadolibre.com.ar/*",
-                "http://inmueble.mercadolibre.com.ar/*", 
-                "https://inmueble.mercadolibre.com.ar/*" 
+                "http://departamento.mercadolibre.com.ar/*", 
+                "https://departamento.mercadolibre.com.ar/*",
+                "http://terreno.mercadolibre.com.ar/*", 
+                "https://terreno.mercadolibre.com.ar/*"
             ],
 
             "js": [
