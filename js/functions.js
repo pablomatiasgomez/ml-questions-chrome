@@ -22,7 +22,7 @@ while (!item_id && count<3) {
 
 if (item_id) {
     var offset = -50;
-    questions = [];
+    var questions = [];
     getQuestions();
 }
 
