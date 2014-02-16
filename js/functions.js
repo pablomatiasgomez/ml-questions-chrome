@@ -21,24 +21,33 @@ while (!item_id && count<3) {
 }
 
 if (item_id) {
-	$.ajax({
-		type: 'GET',
-        url: "https://api.mercadolibre.com/questions/search?item_id=" + item_id,
+    var offset = -50;
+    questions = [];
+    getQuestions();
+}
+
+function getQuestions() {
+    offset += 50;
+    $.ajax({
+        type: 'GET',
+        url: "https://api.mercadolibre.com/questions/search?item_id=" + item_id + "&offset=" + offset,
         dataType:"json",
         success: function(data) {
-			var total = data.total;
-			var limit = data.limit; // 50
-            if ($(".contactarInferior").length)
-                $(".contactarInferior").after(getQuestionsHTML(data.questions));
-            else
-                $("#tabNavigator").after(getQuestionsHTML(data.questions));
+            var total = data.total;
+            var limit = data.limit; // 50
+            questions = questions.concat(data.questions);
+
+            if (!data.questions.length) {
+                if ($(".contactarInferior").length) $(".contactarInferior").after(getQuestionsHTML(questions));
+                else $("#tabNavigator").after(getQuestionsHTML(questions));
+            }
+            else getQuestions(); 
         },
         error: function() {
             console.log("error");
         }
-	});
+    });
 }
-
 
 function getQuestionsHTML(questions) {
 	var html = "";
