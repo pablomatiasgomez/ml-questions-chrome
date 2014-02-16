@@ -1,10 +1,10 @@
 {
     "manifest_version": 2,
 
-    "name": "ML Questions",
+    "name": "Mercadolibre Preguntas Autos",
     "short_name": "ML Questions",
-    "description": "Esta extension sirve para mostrar las preguntas (que mercadolibre oculta) de autos, motos e inmuebles (casas, departamentos, terrenos, etc) de mercadolibre ~ By Anush ~",
-    "version": "1.2",
+    "description": "Extension para mostrar las preguntas (que mercadolibre oculta) en las publicaciones de autos, motos e inmuebles ~ By Anush ~",
+    "version": "1.2.1",
     "author": "Pablo Matías Gomez",
 
     "icons": {

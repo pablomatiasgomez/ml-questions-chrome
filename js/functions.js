@@ -43,10 +43,16 @@ if (item_id) {
 function getQuestionsHTML(questions) {
 	var html = "";
 	html += "<div id='questions' class='ch-box-lite new-questions'>";
-	html += "	<h5 class='seoH5 typo'>Preguntas al vendedor</h5>";
-	html += "	<ol id='otherQuestions' class='list-questions'>";
+	html += "    <h5 class='seoH5 typo'>Preguntas al vendedor</h5>";
+    if (!questions.length) {
+        html += "<div id='divPersonalQuestions' class='wrap-personal-questions'>";
+        html += "   <p class='no-questions' style='display: block;'>Nadie hizo preguntas todavía. ¡Sé el primero!</p>";
+        html += "   <p id='statusQuestion' class='ch-box-ok' style='display:none;'></p>";
+        html += "</div>";
+    }
+	html += "    <ol id='otherQuestions' class='list-questions'>";
 	$.each(questions, function(index){
-		html += "	<li id='Quest" + this.id + "'>";
+		html += "    <li id='Quest" + this.id + "'>";
         html += "		<dl class='question' id='" + index + 1 + "'>";
         html += "			<dt class='title'>";
         html += "				<i class='vip-icon ch-icon-comment'></i>";
@@ -68,7 +74,7 @@ function getQuestionsHTML(questions) {
         	html += "		</dd>";
         }
         html += "		</dl>";
-        html += "	</li>";
+        html += "   </li>";
 	});
 	html += "	</ol>";
 	html += "</div>";
