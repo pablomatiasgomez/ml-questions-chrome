@@ -51,7 +51,7 @@ function getQuestions() {
 
 function getQuestionsHTML(questions) {
 	var html = "";
-	html += "<div id='questions' class='ch-box-lite new-questions'>";
+	html += "<div id='questions' class='hidden-questions ch-box-lite new-questions'>";
 	html += "    <h5 class='seoH5 typo'>Preguntas al vendedor</h5>";
     if (!questions.length) {
         html += "<div id='divPersonalQuestions' class='wrap-personal-questions'>";
