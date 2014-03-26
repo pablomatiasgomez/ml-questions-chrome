@@ -17,6 +17,8 @@ while (!item_id && count<3) {
             str = $(".denounce-wrap .id-item").html();
             if (str) item_id = "MLA" + str.substr(str.indexOf("#") + 1, str.length).split(" ")[0];
             break;
+        default:
+            break;
     }
 }
 
@@ -44,13 +46,13 @@ function getQuestions() {
             else getQuestions(); 
         },
         error: function() {
-            console.log("error");
+            console.error("error");
         }
     });
 }
 
 function getQuestionsHTML(questions) {
-	var html = "";
+	/*var html = "";
 	html += "<div id='questions' class='hidden-questions ch-box-lite new-questions'>";
 	html += "    <h5 class='seoH5 typo'>Preguntas al vendedor</h5>";
     if (!questions.length) {
@@ -87,5 +89,43 @@ function getQuestionsHTML(questions) {
 	});
 	html += "	</ol>";
 	html += "</div>";
-	return html;
+	return html;*/
+
+    var node = $("<div>", { id: "questions", "class": "hidden-questions ch-box-lite new-questions" })
+                    .append($("<h5>", { "class": "seoH5 typo", text: "Preguntas al vendedor" }))
+                    .append($("<ol>", { id: "otherQuestions", "class": "list-questions" }));
+
+    if (!questions.length) {
+        $(node).find("h5")
+            .after($("<div>", { id: "divPersonalQuestions", "class": "wrap-personal-questions" })
+                .append($("<p>", { "class": "no-questions", style: "display: block;", text: "Nadie hizo preguntas todavía. ¡Sé el primero!" }))
+                .append($("<p>", { id: "statusQuestion", "class": "ch-box-ok", style:"display:none;" })));
+    }
+    
+    var quest;
+    $.each(questions, function(index){
+        quest = $("<li>", { id: "Quest" + this.id  })
+                    .append($("<dl>", { "class": "question", id: index + 1 })
+                        .append($("<dt>", { "class": "title" })
+                            .append($("<i>", { "class": "vip-icon ch-icon-comment" }))
+                            .append($("<label>", { "class": "ch-hide", title: "Pregunta", text: "Pregunta:"})))
+                        .append($("<dd>", { "class": "txt" })
+                            .append($("<span>", { text: this.text }))
+                            .append($("<a>", { id: "denouncequestion", "class": "denouncequestion", href: "#", "aria-label": "ch-modal-27", style: "visibility: hidden;", text: "Denunciar" }))));
+
+        if (this.answer != null) {
+            $(quest).find(".question")
+                        .append($("<dt>", { "class": "answer" })
+                            .append($("<i>", { "class": "vip-icon ch-icon-comments" }))
+                            .append($("<label>", { "class": "ch-hide", title: "Respuesta", text: "Respuesta:"})))
+                        .append($("<dd>", { "class": "txt answer-txt" })
+                            .append($("<span>", { text: this.answer.text }))
+                            .append($("<span>", { "class": "time", text: " - Hace " + Math.round(Number((new Date() - new Date(this.answer.date_created)) / 3600000 / 24)) + " días. " }))
+                            .append($("<a>", { id: "denounceanswer", "class": "denounceanswer", href: "#", "aria-label": "ch-modal-28", style: "visibility: hidden;", text: "Denunciar" })));
+        }
+
+        $(node).find("#otherQuestions").append(quest);
+    });
+
+    return node;
 }
