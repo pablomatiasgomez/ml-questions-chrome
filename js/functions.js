@@ -30,9 +30,12 @@ if (item_id) {
 
 function getQuestions() {
     offset += 50;
+    var url = "https://api.mercadolibre.com/questions/search";
+    var queryString = "?item_id=" + encodeURIComponent(item_id) + "&offset=" + encodeURIComponent(offset);
+    url = url + queryString;
     $.ajax({
         type: 'GET',
-        url: "https://api.mercadolibre.com/questions/search?item_id=" + item_id + "&offset=" + offset,
+        url: url,
         dataType:"json",
         success: function(data) {
             var total = data.total;
@@ -47,50 +50,13 @@ function getQuestions() {
         },
         error: function() {
             console.error("error");
-        }
+        },
+        jsonp: false,
+        jsonpCallback: function() { return false; }
     });
 }
 
 function getQuestionsHTML(questions) {
-	/*var html = "";
-	html += "<div id='questions' class='hidden-questions ch-box-lite new-questions'>";
-	html += "    <h5 class='seoH5 typo'>Preguntas al vendedor</h5>";
-    if (!questions.length) {
-        html += "<div id='divPersonalQuestions' class='wrap-personal-questions'>";
-        html += "   <p class='no-questions' style='display: block;'>Nadie hizo preguntas todavía. ¡Sé el primero!</p>";
-        html += "   <p id='statusQuestion' class='ch-box-ok' style='display:none;'></p>";
-        html += "</div>";
-    }
-	html += "    <ol id='otherQuestions' class='list-questions'>";
-	$.each(questions, function(index){
-		html += "    <li id='Quest" + this.id + "'>";
-        html += "		<dl class='question' id='" + index + 1 + "'>";
-        html += "			<dt class='title'>";
-        html += "				<i class='vip-icon ch-icon-comment'></i>";
-        html += "				<label class='ch-hide' title='Pregunta'>Pregunta:</label>";
-        html += "			</dt>"	
-        html += "			<dd class='txt'>";
-        html += "				<span>" + this.text + "</span>";
-        html += "				<a id='denouncequestion' class='denouncequestion' href='#' aria-label='ch-modal-27' style='visibility: hidden;'>Denunciar</a>";
-        html += "			</dd>";
-        if (this.answer != null) {
-        	html += "		<dt class='answer'>";
-        	html += "			<i class='vip-icon ch-icon-comments'></i>";
-       		html += "			<label class='ch-hide' title='Respuesta'>Respuesta:</label>";
-        	html += "		</dt>";
-        	html += "		<dd class='txt answer-txt'>";
-        	html += "			<span>" + this.answer.text + "</span>";
-        	html += "			<span class='time'> - Hace " + Math.round(Number((new Date() - new Date(this.answer.date_created)) / 3600000 / 24)) + " días. </span>";
-        	html += "			<a id='denounceanswer' class='denounceanswer' href='#' aria-label='ch-modal-28' style='visibility: hidden;'>Denunciar</a>";
-        	html += "		</dd>";
-        }
-        html += "		</dl>";
-        html += "   </li>";
-	});
-	html += "	</ol>";
-	html += "</div>";
-	return html;*/
-
     var node = $("<div>", { id: "questions", "class": "hidden-questions ch-box-lite new-questions" })
                     .append($("<h5>", { "class": "seoH5 typo", text: "Preguntas al vendedor" }))
                     .append($("<ol>", { id: "otherQuestions", "class": "list-questions" }));
