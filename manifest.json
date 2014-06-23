@@ -4,7 +4,7 @@
     "name": "Mercadolibre Preguntas Autos",
     "short_name": "ML Questions",
     "description": "Extension para mostrar las preguntas (que mercadolibre oculta) en las publicaciones de autos, motos e inmuebles ~ By Anush ~",
-    "version": "1.3.3",
+    "version": "1.4",
     "author": "Pablo Matías Gomez",
 
     "icons": {
@@ -22,21 +22,7 @@
     "content_scripts": [
         {
             "matches": [
-                "http://vehiculo.mercadolibre.com.ar/*", 
-                "https://vehiculo.mercadolibre.com.ar/*",
-                "http://auto.mercadolibre.com.ar/*", 
-                "https://auto.mercadolibre.com.ar/*",
-                "http://moto.mercadolibre.com.ar/*", 
-                "https://moto.mercadolibre.com.ar/*",
-
-                "http://inmueble.mercadolibre.com.ar/*", 
-                "https://inmueble.mercadolibre.com.ar/*",
-                "http://casa.mercadolibre.com.ar/*", 
-                "https://casa.mercadolibre.com.ar/*",
-                "http://departamento.mercadolibre.com.ar/*", 
-                "https://departamento.mercadolibre.com.ar/*",
-                "http://terreno.mercadolibre.com.ar/*", 
-                "https://terreno.mercadolibre.com.ar/*"
+                "*://*/*"
             ],
 
             "js": [
