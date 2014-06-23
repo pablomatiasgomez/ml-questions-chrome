@@ -6,7 +6,7 @@ var access_token;
 var CLIENT_ID = "928604158353929";
 var CLIENT_SECRET = "6exMvwCVkDZ9hDHqikcyZjmkbrSwjeWg";
 
-if (window.location.host.indexOf("mercadolibre") != -1) {
+if ($(".new-questions").length == 0) {
     while (!item_id && count<3) {
         count++;
         switch (count) {
