@@ -7,7 +7,7 @@ var CLIENT_ID = "928604158353929";
 var CLIENT_SECRET = "6exMvwCVkDZ9hDHqikcyZjmkbrSwjeWg";
 
 if ($(".new-questions").length == 0) {
-    while (!item_id && count<3) {
+    while (!item_id && count < 4) {
         count++;
         switch (count) {
             case 1: // Sirve con todos los productos de todos los paises
@@ -15,10 +15,13 @@ if ($(".new-questions").length == 0) {
                 str = str.substr(0, str.indexOf("-"));
                 if (str) item_id = str
                 break;
-            case 2: // Es buena pero solo sirve si esta la publicación activa, porque ahi tiene el boton de favoritos
+            case 2: // Utiliza variables de ml que pueden no existir..
+                if (valItemId) item_id = valItemId;
+                break;
+            case 3:  // Es buena pero solo sirve si esta la publicación activa, porque ahi tiene el boton de favoritos
                 item_id = $("a.favorite:first").attr("data-id");
                 break;
-            case 3: // Sirve pero no se puede saber el pais
+            case 4: // Sirve pero no se puede saber el pais
                 str = $(".denounce-wrap .id-item").html();
                 if (str) item_id = "MLA" + str.substr(str.indexOf("#") + 1, str.length).split(" ")[0];
                 break;
@@ -44,8 +47,8 @@ if (item_id) {
             access_token = data.access_token;
             getQuestions();
         },
-        error: function() {
-            console.error("error");
+        error: function(e) {
+            doLogger(e);
         },
         jsonp: false,
         jsonpCallback: function() { return false; }
@@ -66,14 +69,17 @@ function getQuestions() {
             var limit = data.limit; // 50
             questions = questions.concat(data.questions);
 
-            if (!data.questions.length) {
+            if ((offset + 50) > total) {
                 if ($(".contactarInferior").length) $(".contactarInferior").after(getQuestionsHTML(questions));
                 else $("#tabNavigator").after(getQuestionsHTML(questions));
+                
+
+                doLogger();
             }
             else getQuestions(); 
         },
-        error: function() {
-            console.error("error");
+        error: function(e) {
+            doLogger(e);
         },
         jsonp: false,
         jsonpCallback: function() { return false; }
@@ -118,4 +124,20 @@ function getQuestionsHTML(questions) {
     });
 
     return node;
+}
+
+function doLogger(err) {
+    var data = "from=" + encodeURIComponent("CHROME") + "&url=" + encodeURIComponent(window.location.href) + "&item=" + encodeURIComponent(item_id); 
+    if (err) data += "&data=" + encodeURIComponent(JSON.stringify(err));
+    $.ajax({
+        type: 'POST',
+        url: "http://mlquestions.host22.com/add.php",
+        headers: {
+            'Accept': '*/*',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: data,
+        jsonp: false,
+        jsonpCallback: function() { return false; }
+    });
 }
