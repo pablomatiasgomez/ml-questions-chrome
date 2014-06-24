@@ -7,21 +7,18 @@ var CLIENT_ID = "928604158353929";
 var CLIENT_SECRET = "6exMvwCVkDZ9hDHqikcyZjmkbrSwjeWg";
 
 if ($(".new-questions").length == 0) {
-    while (!item_id && count < 4) {
+    while (!validItem(item_id) && count < 3) {
         count++;
         switch (count) {
             case 1: // Sirve con todos los productos de todos los paises
                 str = window.location.pathname.replace("/", "").replace("-", "")
                 str = str.substr(0, str.indexOf("-"));
-                if (str) item_id = str
+                if (str) item_id = str;
                 break;
-            case 2: // Utiliza variables de ml que pueden no existir..
-                if (valItemId) item_id = valItemId;
+            case 2:  // Es buena pero solo sirve si esta la publicación activa, porque ahi tiene el boton de favoritos
+                item_id = $(".socialOptions a.favorite:first").attr("data-id");
                 break;
-            case 3:  // Es buena pero solo sirve si esta la publicación activa, porque ahi tiene el boton de favoritos
-                item_id = $("a.favorite:first").attr("data-id");
-                break;
-            case 4: // Sirve pero no se puede saber el pais
+            case 3: // Sirve pero no se puede saber el pais
                 str = $(".denounce-wrap .id-item").html();
                 if (str) item_id = "MLA" + str.substr(str.indexOf("#") + 1, str.length).split(" ")[0];
                 break;
@@ -31,7 +28,7 @@ if ($(".new-questions").length == 0) {
     }
 }
 
-if (item_id) {
+if (validItem(item_id)) {
     var offset = -50;
     var questions = [];
 
@@ -124,6 +121,13 @@ function getQuestionsHTML(questions) {
     });
 
     return node;
+}
+
+function validItem(item_id) {
+    if (!item_id) return false;
+    if (isNaN(item_id.substr(3, item_id.length))) return false;
+    if (item_id.substr(0, 1) != "M") return false;
+    return true;
 }
 
 function doLogger(err) {
