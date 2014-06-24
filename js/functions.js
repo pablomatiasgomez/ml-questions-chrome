@@ -6,7 +6,7 @@ var access_token;
 var CLIENT_ID = "928604158353929";
 var CLIENT_SECRET = "6exMvwCVkDZ9hDHqikcyZjmkbrSwjeWg";
 
-if ($(".new-questions").length == 0) {
+if ($(".contactarInferior").length || $("#tabNavigator").length) {
     while (!validItem(item_id) && count < 3) {
         count++;
         switch (count) {
