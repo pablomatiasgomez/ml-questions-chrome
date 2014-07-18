@@ -29,7 +29,7 @@ if ($(".contactarInferior").length || $("#tabNavigator").length) {
 }
 
 if (validItem(item_id)) {
-    var offset = -50;
+    var offset = 0;
     var questions = [];
 
     //doLogin
@@ -44,16 +44,13 @@ if (validItem(item_id)) {
             access_token = data.access_token;
             getQuestions();
         },
-        error: function(e) {
-            doLogger(e);
-        },
+        error: doLogger,
         jsonp: false,
         jsonpCallback: function() { return false; }
     });
 }
 
 function getQuestions() {
-    offset += 50;
     var url = "https://api.mercadolibre.com/questions/search";
     var queryString = "?item_id=" + encodeURIComponent(item_id) + "&offset=" + encodeURIComponent(offset) + "&access_token=" + encodeURIComponent(access_token);
     url = url + queryString;
@@ -66,7 +63,8 @@ function getQuestions() {
             var limit = data.limit; // 50
             questions = questions.concat(data.questions);
 
-            if ((offset + 50) > total) {
+            offset += !isNaN(limit) ? limit : 50;
+            if (offset >= total) {
                 if ($(".contactarInferior").length) $(".contactarInferior").after(getQuestionsHTML(questions));
                 else $("#tabNavigator").after(getQuestionsHTML(questions));
                 
@@ -75,9 +73,7 @@ function getQuestions() {
             }
             else getQuestions(); 
         },
-        error: function(e) {
-            doLogger(e);
-        },
+        error: doLogger,
         jsonp: false,
         jsonpCallback: function() { return false; }
     });
@@ -125,7 +121,7 @@ function getQuestionsHTML(questions) {
 
 function validItem(item_id) {
     if (!item_id) return false;
-    if (isNaN(item_id.substr(3, item_id.length))) return false;
+    if (isNaN(item_id.substr(3))) return false;
     if (item_id.substr(0, 1) != "M") return false;
     return true;
 }
