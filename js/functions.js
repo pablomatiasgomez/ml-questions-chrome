@@ -69,14 +69,16 @@
 
                 offset += !isNaN(limit) ? limit : 50;
                 if (offset >= total) {
-                    if (!$(".new-questions").length) {
-                        if ($(".contactarInferior").length) $(".contactarInferior").after(getQuestionsHTML(questions));
-                        else if ($("#tabNavigator").length) $("#tabNavigator").after(getQuestionsHTML(questions));
-                        else if ($("#productDescription").length) $("#productDescription").append($("<div>", { "class": "vip-bounds" }).append(getQuestionsHTML(questions)));
+                    $(function() {
+                        if (!$(".new-questions").length) {
+                            if ($(".contactarInferior").length) $(".contactarInferior").after(getQuestionsHTML(questions));
+                            else if ($("#tabNavigator").length) $("#tabNavigator").after(getQuestionsHTML(questions));
+                            else if ($("#productDescription").length) $("#productDescription").append($("<div>", { "class": "vip-bounds" }).append(getQuestionsHTML(questions)));
 
 
-                        doLogger();
-                    }
+                            doLogger();
+                        }
+                    });
                 }
                 else getQuestions(); 
             },
