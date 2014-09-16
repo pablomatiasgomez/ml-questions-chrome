@@ -8,9 +8,9 @@
     var CLIENT_SECRET = "6exMvwCVkDZ9hDHqikcyZjmkbrSwjeWg";
 
     var BROWSER = "CHROME";
-    var VERSION = "1.5";
+    var VERSION = "1.5.1";
 
-    if (!$(".new-questions").length) {
+    if ($(".contactarInferior").length || $("#tabNavigator").length || $("#productDescription").length) {
         while (!validItem(item_id) && count < 3) {
             count++;
             switch (count) {
