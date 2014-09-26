@@ -5,7 +5,7 @@
     "short_name": "ML Questions",
     "description": "Extension para mostrar las preguntas (que mercadolibre oculta) en las publicaciones de autos, motos, inmuebles, servicios, etc",
     "author": "Pablo Matías Gomez",
-    "version": "1.5.1",
+    "version": "1.5.2",
 
     "icons": {
         "16": "images/icons/icon16.png",

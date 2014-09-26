@@ -11,3 +11,19 @@
 #divPersonalQuestions {
 	margin: 0px 70px;
 }
+
+
+#questions #otherQuestions {
+	clear: none !important;
+}
+
+#questions form {
+	float: right;
+	margin-right: -15px;
+	margin-top: 35px;
+}
+
+#questions form input[type='image']{
+	border: none;
+	box-shadow: none;
+}

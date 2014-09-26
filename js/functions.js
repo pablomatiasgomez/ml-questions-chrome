@@ -1,5 +1,5 @@
 (function() {
-    var item_id;
+    var item_id = null;
     var count = 0;
     var str;
     var access_token;
@@ -8,14 +8,14 @@
     var CLIENT_SECRET = "6exMvwCVkDZ9hDHqikcyZjmkbrSwjeWg";
 
     var BROWSER = "CHROME";
-    var VERSION = "1.5.1";
+    var VERSION = "1.5.2";
 
     if ($(".contactarInferior").length || $("#tabNavigator").length || $("#productDescription").length) {
         while (!validItem(item_id) && count < 3) {
             count++;
             switch (count) {
                 case 1: // Sirve con todos los productos de todos los paises
-                    str = window.location.pathname.replace("/", "").replace("-", "")
+                    str = window.location.pathname.replace("/", "").replace("-", "");
                     str = str.substr(0, str.indexOf("-"));
                     if (str) item_id = str;
                     break;
@@ -90,6 +90,11 @@
 
     function getQuestionsHTML(questions) {
         var node = $("<div>", { id: "questions", "class": "hidden-questions ch-box-lite new-questions" })
+                        .append($("<form>", { action: "https://www.paypal.com/cgi-bin/webscr", method: "post", target:"_top" })
+                                .append($("<input>", { type: "hidden", name: "cmd", value: "_s-xclick" }))
+                                .append($("<input>", { type: "hidden", name: "hosted_button_id", value: "7Z8VU5GP8BLY2" }))
+                                .append($("<input>", { type: "image", src: "https://www.paypalobjects.com/es_XC/i/btn/btn_donate_SM.gif", border: "0", name: "submit", alt: "PayPal, la forma más segura y rápida de pagar en línea." }))
+                                .append($("<img>", { alt: "", border: "0", src: "https://www.paypalobjects.com/en_US/i/scr/pixel.gif", width: "1", height: "1" })))
                         .append($("<h5>", { "class": "seoH5 typo", html: "Preguntas al vendedor" }))
                         .append($("<ol>", { id: "otherQuestions", "class": "list-questions" }));
 
